@@ -10,7 +10,7 @@ import (
 )
 
 func healthcheck(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hi there!")
+	fmt.Fprintf(w, "Hi there! I am v2")
 }
 
 func main() {
@@ -24,8 +24,8 @@ func main() {
 
 	agent := consulClient.Agent()
 	reg := &consulapi.AgentServiceRegistration{
-		Name: "webapp",
-		Port: 8080,
+		Name: "api",
+		Port: 8081,
 		Tags: []string{"v2"},
 	}
 	if err := agent.ServiceRegister(reg); err != nil {
@@ -34,6 +34,5 @@ func main() {
 
 	http.HandleFunc("/ping/", healthcheck)
 
-	// nil argument here specifies using the DefaultServeMux
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe(":8081", nil))
 }
