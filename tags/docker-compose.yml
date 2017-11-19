@@ -1,0 +1,14 @@
+version: '2'
+
+services:
+  consul:
+    image: consul
+    container_name: consul
+  api-v1:
+    image: amitsaha/api:v1
+    depends_on:
+      - consul
+  api-v2:
+    image: amitsaha/api:v2
+    depends_on:
+      - consul

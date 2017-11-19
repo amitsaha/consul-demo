@@ -10,12 +10,13 @@ import (
 )
 
 func healthcheck(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hi there! I am v2")
+	fmt.Fprintf(w, "Hi there! I am v1")
 }
 
 func main() {
 
 	consulConfig := consulapi.DefaultConfig()
+	consulConfig.Address = "consul:8500"
 	consulClient, err := consulapi.NewClient(consulConfig)
 	if err != nil {
 		log.Fatalf("err: %v", err)
@@ -25,8 +26,8 @@ func main() {
 	agent := consulClient.Agent()
 	reg := &consulapi.AgentServiceRegistration{
 		Name: "api",
-		Port: 8081,
-		Tags: []string{"v2"},
+		Port: 8080,
+		Tags: []string{"v1"},
 	}
 	if err := agent.ServiceRegister(reg); err != nil {
 		log.Fatalf("err: %v", err)
@@ -34,5 +35,5 @@ func main() {
 
 	http.HandleFunc("/ping/", healthcheck)
 
-	log.Fatal(http.ListenAndServe(":8081", nil))
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
