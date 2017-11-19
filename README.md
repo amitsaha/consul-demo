@@ -1,1 +1,3 @@
-dnsmasq + consul: https://www.consul.io/docs/guides/forwarding.html#dnsmasq-setup
+# Consul demos
+
+- [Tags](https://github.com/amitsaha/consul-demos/tree/master/tags) (Blog post)[]
