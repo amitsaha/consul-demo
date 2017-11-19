@@ -25,6 +25,7 @@ func main() {
 
 	agent := consulClient.Agent()
 	reg := &consulapi.AgentServiceRegistration{
+		ID:   "apiv1",
 		Name: "api",
 		Port: 8080,
 		Tags: []string{"v1"},
