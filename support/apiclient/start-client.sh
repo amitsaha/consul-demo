@@ -1,4 +1,5 @@
 #!/bin/bash
 docker build -t amitsaha/apiclient .
-docker run --network tags_consul_demo --dns 172.22.0.4 -ti amitsaha/apiclient sh
-
+# TODO: Get IP address of dnsmasq container
+DNSMASQ_IP=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' dnsmasq)
+docker run --network tags_consul_demo --dns $DNSMASQ_IP -ti amitsaha/apiclient sh

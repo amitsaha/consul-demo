@@ -19,14 +19,6 @@ services:
     image: amitsaha/api:v2
     depends_on:
       - consul
-  dnsmasq:
-    networks:
-      consul_demo: {}
-    image: amitsaha/dnsmasq
-    depends_on:
-      - consul
-    cap_add:
-      - NET_ADMIN
 networks:
   consul_demo:
     driver: bridge
