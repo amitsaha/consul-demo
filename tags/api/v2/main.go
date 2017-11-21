@@ -25,10 +25,11 @@ func main() {
 
 	agent := consulClient.Agent()
 	reg := &consulapi.AgentServiceRegistration{
-		ID:   "apiv2",
-		Name: "api",
-		Port: 8080,
-		Tags: []string{"v2"},
+		ID:      "apiv2",
+		Address: "172.21.0.4",
+		Name:    "api",
+		Port:    8080,
+		Tags:    []string{"v2"},
 	}
 	if err := agent.ServiceRegister(reg); err != nil {
 		log.Fatalf("err: %v", err)
@@ -36,5 +37,5 @@ func main() {
 
 	http.HandleFunc("/ping/", healthcheck)
 
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe("0.0.0.0:8080", nil))
 }
