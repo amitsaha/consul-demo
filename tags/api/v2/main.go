@@ -11,6 +11,7 @@ import (
 )
 
 // GetLocalIP returns the non loopback local IP of the host
+// https://stackoverflow.com/a/31551220/6998584
 func GetLocalIP() string {
 	addrs, err := net.InterfaceAddrs()
 	if err != nil {
